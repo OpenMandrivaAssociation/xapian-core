@@ -1,11 +1,12 @@
+%define oname xapian
 %define major 15
-%define libname %mklibname xapian %{major}
-%define develname %mklibname xapian -d
+%define libname %mklibname %{oname} %{major}
+%define develname %mklibname %{oname} -d
 
 Summary:	Open source search engine library
 Name:           xapian-core
 Version:	1.0.5
-Release:        %mkrel 1
+Release:        %mkrel 2
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.xapian.org/
@@ -71,6 +72,8 @@ Summary:	Development files for %{name}
 Group:		Development/Other
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
+Provides:	%{oname}-devel = %{version}-%{release}
+Provides:	lib%{oname}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
 Obsoletes:	%mklibname %{name} 14 -d
 Obsoletes:	%mklibname %{name} 15 -d

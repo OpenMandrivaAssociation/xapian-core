@@ -2,7 +2,7 @@
 %define libname %mklibname xapian %{major}
 %define develname %mklibname xapian -d
 
-Summary:	Open Source Search Engine Library
+Summary:	Open source search engine library
 Name:           xapian-core
 Version:	1.0.5
 Release:        %mkrel 1
@@ -81,7 +81,7 @@ Header files for %{name}.
 %files  -n %{develname}
 %defattr(-,root,root)
 %{_bindir}/xapian-config
-%doc %{_docdir}/%{oname}/
+%doc %{_docdir}/%{name}/
 %dir %{_includedir}/xapian
 %{_includedir}/xapian/*.h
 %{_includedir}/*.h

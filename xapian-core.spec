@@ -1,21 +1,22 @@
-%define oname xapian-core
 %define major 15
-%define libname %mklibname %{name} %{major}
-%define develname %mklibname %{name} -d
+%define libname %mklibname xapian %{major}
+%define develname %mklibname xapian -d
 
 Summary:	Open Source Search Engine Library
-Name:           xapian
-Version:	1.0.4
-Release:        %mkrel 2
+Name:           xapian-core
+Version:	1.0.5
+Release:        %mkrel 1
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.xapian.org/
-Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{oname}-%{version}.tar.gz
+Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.bz2
 BuildRequires:	zlib-devel
 %ifarch x86_64
 BuildRequires:	chrpath
 %endif
 Requires:	%{libname} = %{version}-%{release}
+Obsoletes:	xapian
+Provides:	xapian
 
 %description
 Xapian is an Open Source Search Engine Library, released under the 
@@ -92,7 +93,7 @@ Header files for %{name}.
 #--------------------------------------------------------------------
 
 %prep
-%setup -qn %{oname}-%{version}
+%setup -q
 
 %build
 %configure2_5x

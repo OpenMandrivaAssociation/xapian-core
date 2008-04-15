@@ -5,14 +5,15 @@
 
 Summary:	Search engine library
 Name:           xapian-core
-Version:	1.0.5
-Release:        %mkrel 3
+Version:	1.0.6
+Release:        %mkrel 1
 License:	GPLv2+
 Group:		Databases
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://www.xapian.org/
 Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.bz2
 BuildRequires:	zlib-devel
+BuildRequires:	valgrind
 %ifarch x86_64
 BuildRequires:	chrpath
 %endif

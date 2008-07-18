@@ -5,11 +5,11 @@
 
 Summary:	Search engine library
 Name:           xapian-core
-Version:	1.0.6
+Version:	1.0.7
 Release:        %mkrel 1
 License:	GPLv2+
 Group:		Databases
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+
 URL:		http://www.xapian.org/
 Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.bz2
 BuildRequires:	zlib-devel
@@ -18,8 +18,9 @@ BuildRequires:	valgrind
 BuildRequires:	chrpath
 %endif
 Requires:	%{libname} = %{version}-%{release}
-Obsoletes:	xapian
+Obsoletes:	xapian < 1.0.7
 Provides:	xapian
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Xapian is an Open Source Search Engine Library, released under the 
@@ -31,47 +32,13 @@ add advanced indexing and search facilities to their own applications.
 It supports the Probabilistic Information Retrieval model and also 
 supports a rich set of boolean query operators.
 
-%files
-%defattr(-,root,root,-)
-%{_bindir}/copydatabase
-%{_bindir}/delve
-%{_bindir}/quartzcheck
-%{_bindir}/quartzcompact
-%{_bindir}/quartzdump
-%{_bindir}/quest
-%{_bindir}/simpleexpand
-%{_bindir}/simpleindex
-%{_bindir}/simplesearch
-%{_bindir}/xapian-compact
-%{_bindir}/xapian-check
-%{_bindir}/xapian-progsrv
-%{_bindir}/xapian-tcpsrv
-%{_bindir}/xapian-inspect
-%{_mandir}/man1/*
-
-#--------------------------------------------------------------------
-
 %package -n %{libname}
-Summary:	Libraries for %{name}
+Summary:	Shared library for %{name}
 Group:		Development/Other
 Obsoletes:	%mklibname %{name} 14
 
 %description -n %{libname}
-Libraries for %{name}.
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%files -n %{libname}
-%defattr(-,root,root)
-%{_libdir}/libxapian.so.%{major}*
-
-#--------------------------------------------------------------------
+Shared library for %{name}.
 
 %package  -n %{develname}
 Summary:	Development files for %{name}
@@ -85,21 +52,7 @@ Obsoletes:	%mklibname %{name} 14 -d
 Obsoletes:	%mklibname %{name} 15 -d
 
 %description -n %{develname}
-Header files for %{name}.
-
-%files  -n %{develname}
-%defattr(-,root,root)
-%{_bindir}/xapian-config
-%doc %{_docdir}/%{name}/
-%dir %{_includedir}/xapian
-%{_includedir}/xapian/*.h
-%{_includedir}/*.h
-%{_datadir}/aclocal/xapian.m4
-%{_libdir}/libxapian.a
-%{_libdir}/libxapian.la
-%{_libdir}/libxapian.so
-
-#--------------------------------------------------------------------
+Development files and headers for %{name}.
 
 %prep
 %setup -q
@@ -130,3 +83,45 @@ chrpath -d %{buildroot}%{_bindir}/xapian-tcpsrv
 
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+
+%if %mdkversion < 200900
+%post -n %{libname} -p /sbin/ldconfig
+%endif
+
+%if %mdkversion < 200900
+%postun -n %{libname} -p /sbin/ldconfig
+%endif
+
+%files
+%defattr(-,root,root)
+%{_bindir}/copydatabase
+%{_bindir}/delve
+%{_bindir}/quartzcheck
+%{_bindir}/quartzcompact
+%{_bindir}/quartzdump
+%{_bindir}/quest
+%{_bindir}/simpleexpand
+%{_bindir}/simpleindex
+%{_bindir}/simplesearch
+%{_bindir}/xapian-compact
+%{_bindir}/xapian-check
+%{_bindir}/xapian-progsrv
+%{_bindir}/xapian-tcpsrv
+%{_bindir}/xapian-inspect
+%{_mandir}/man1/*
+
+%files -n %{libname}
+%defattr(-,root,root)
+%{_libdir}/libxapian.so.%{major}*
+
+%files -n %{develname}
+%defattr(-,root,root)
+%{_bindir}/xapian-config
+%doc %{_docdir}/%{name}/
+%dir %{_includedir}/xapian
+%{_includedir}/xapian/*.h
+%{_includedir}/*.h
+%{_datadir}/aclocal/xapian.m4
+%{_libdir}/libxapian.a
+%{_libdir}/libxapian.la
+%{_libdir}/libxapian.so

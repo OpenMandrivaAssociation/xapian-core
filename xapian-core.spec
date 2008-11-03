@@ -6,10 +6,9 @@
 Summary:	Search engine library
 Name:           xapian-core
 Version:	1.0.9
-Release:        %mkrel 1
+Release:        %mkrel 2
 License:	GPLv2+
 Group:		Databases
-
 URL:		http://www.xapian.org/
 Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.bz2
 BuildRequires:	zlib-devel
@@ -34,7 +33,7 @@ supports a rich set of boolean query operators.
 
 %package -n %{libname}
 Summary:	Shared library for %{name}
-Group:		Development/Other
+Group:		System/Libraries
 Obsoletes:	%mklibname %{name} 14
 
 %description -n %{libname}

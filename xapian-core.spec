@@ -6,7 +6,7 @@
 Summary:	Search engine library
 Name:           xapian-core
 Version:	1.0.15
-Release:        %mkrel 1
+Release:        %mkrel 2
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.xapian.org/
@@ -34,7 +34,6 @@ supports a rich set of boolean query operators.
 %package -n %{libname}
 Summary:	Shared library for %{name}
 Group:		System/Libraries
-Obsoletes:	%mklibname %{name} 14
 
 %description -n %{libname}
 Shared library for %{name}.
@@ -47,8 +46,6 @@ Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	%{oname}-devel = %{version}-%{release}
 Provides:	lib%{oname}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
-Obsoletes:	%mklibname %{name} 14 -d
-Obsoletes:	%mklibname %{name} 15 -d
 
 %description -n %{develname}
 Development files and headers for %{name}.

@@ -5,12 +5,12 @@
 
 Summary:	Search engine library
 Name:           xapian-core
-Version:	1.0.17
+Version:	1.0.18
 Release:        %mkrel 1
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.xapian.org/
-Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.bz2
+Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.gz
 BuildRequires:	zlib-devel
 BuildRequires:	valgrind
 %ifarch x86_64

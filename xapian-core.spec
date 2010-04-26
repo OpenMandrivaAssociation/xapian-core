@@ -5,7 +5,7 @@
 
 Summary:	Search engine library
 Name:           xapian-core
-Version:	1.0.18
+Version:	1.0.19
 Release:        %mkrel 1
 License:	GPLv2+
 Group:		Databases

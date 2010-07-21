@@ -84,7 +84,6 @@ chrpath -d %{buildroot}%{_bindir}/xapian-check
 chrpath -d %{buildroot}%{_bindir}/xapian-inspect
 chrpath -d %{buildroot}%{_bindir}/xapian-replicate-server
 chrpath -d %{buildroot}%{_bindir}/xapian-chert-update
-chrpath -d %{buildroot}%{_bindir}/xapian-config
 chrpath -d %{buildroot}%{_bindir}/xapian-metadata
 chrpath -d %{buildroot}%{_bindir}/xapian-replicate
 %endif

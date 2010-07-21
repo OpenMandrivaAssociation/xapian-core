@@ -16,6 +16,7 @@ BuildRequires:	valgrind
 %ifarch x86_64
 BuildRequires:	chrpath
 %endif
+BuildRequires:	libuuid-devel
 Requires:	%{libname} = %{version}-%{release}
 Obsoletes:	xapian < 1.0.7
 Provides:	xapian

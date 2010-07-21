@@ -1,11 +1,11 @@
 %define oname xapian
-%define major 15
+%define major 22
 %define libname %mklibname %{oname} %{major}
 %define develname %mklibname %{oname} -d
 
 Summary:	Search engine library
 Name:           xapian-core
-Version:	1.0.19
+Version:	1.2.2
 Release:        %mkrel 1
 License:	GPLv2+
 Group:		Databases
@@ -34,6 +34,7 @@ supports a rich set of boolean query operators.
 %package -n %{libname}
 Summary:	Shared library for %{name}
 Group:		System/Libraries
+Obsoletes:	%{mklibname %{oname} 15} < 1.2.2
 
 %description -n %{libname}
 Shared library for %{name}.
@@ -54,7 +55,13 @@ Development files and headers for %{name}.
 %setup -q
 
 %build
-%configure2_5x
+%configure2_5x \
+%ifarch x86_64
+	--enable-sse \
+%else
+	--disable-sse \
+%endif
+	--enable-shared
 
 %make
 
@@ -65,9 +72,6 @@ Development files and headers for %{name}.
 %ifarch x86_64
 chrpath -d %{buildroot}%{_bindir}/copydatabase
 chrpath -d %{buildroot}%{_bindir}/delve
-chrpath -d %{buildroot}%{_bindir}/quartzcheck
-chrpath -d %{buildroot}%{_bindir}/quartzcompact
-chrpath -d %{buildroot}%{_bindir}/quartzdump
 chrpath -d %{buildroot}%{_bindir}/quest
 chrpath -d %{buildroot}%{_bindir}/simpleexpand
 chrpath -d %{buildroot}%{_bindir}/simpleindex
@@ -75,6 +79,13 @@ chrpath -d %{buildroot}%{_bindir}/simplesearch
 chrpath -d %{buildroot}%{_bindir}/xapian-compact
 chrpath -d %{buildroot}%{_bindir}/xapian-progsrv
 chrpath -d %{buildroot}%{_bindir}/xapian-tcpsrv
+chrpath -d %{buildroot}%{_bindir}/xapian-check
+chrpath -d %{buildroot}%{_bindir}/xapian-inspect
+chrpath -d %{buildroot}%{_bindir}/xapian-replicate-server
+chrpath -d %{buildroot}%{_bindir}/xapian-chert-update
+chrpath -d %{buildroot}%{_bindir}/xapian-config
+chrpath -d %{buildroot}%{_bindir}/xapian-metadata
+chrpath -d %{buildroot}%{_bindir}/xapian-replicate
 %endif
 
 %clean
@@ -92,18 +103,11 @@ chrpath -d %{buildroot}%{_bindir}/xapian-tcpsrv
 %defattr(-,root,root)
 %{_bindir}/copydatabase
 %{_bindir}/delve
-%{_bindir}/quartzcheck
-%{_bindir}/quartzcompact
-%{_bindir}/quartzdump
 %{_bindir}/quest
 %{_bindir}/simpleexpand
 %{_bindir}/simpleindex
 %{_bindir}/simplesearch
-%{_bindir}/xapian-compact
-%{_bindir}/xapian-check
-%{_bindir}/xapian-progsrv
-%{_bindir}/xapian-tcpsrv
-%{_bindir}/xapian-inspect
+%{_bindir}/xapian-*
 %{_mandir}/man1/*
 
 %files -n %{libname}
@@ -121,3 +125,4 @@ chrpath -d %{buildroot}%{_bindir}/xapian-tcpsrv
 %{_libdir}/libxapian.a
 %{_libdir}/libxapian.la
 %{_libdir}/libxapian.so
+%{_libdir}/cmake/xapian/*.cmake

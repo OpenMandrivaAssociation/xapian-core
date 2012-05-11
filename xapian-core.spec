@@ -2,11 +2,12 @@
 %define major 22
 %define libname %mklibname %{oname} %{major}
 %define develname %mklibname %{oname} -d
+%define develnamestatic %mklibname %{oname} -d -s
 
 Summary:	Search engine library
 Name:           xapian-core
-Version:	1.2.7
-Release:        %mkrel 1
+Version:	1.2.10
+Release:        1
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.xapian.org/
@@ -20,7 +21,6 @@ BuildRequires:	libuuid-devel
 Requires:	%{libname} = %{version}-%{release}
 Obsoletes:	xapian < 1.0.7
 Provides:	xapian
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Xapian is an Open Source Search Engine Library, released under the 
@@ -52,6 +52,23 @@ Requires:	%{libname} = %{version}-%{release}
 %description -n %{develname}
 Development files and headers for %{name}.
 
+
+
+%package  -n %{develnamestatic}
+Summary:	Development files for %{name}
+Group:		Development/Other
+Provides:	%{name}-devel-static = %{version}-%{release}
+Provides:	lib%{name}-devel-static = %{version}-%{release}
+Provides:	%{oname}-devel-static = %{version}-%{release}
+Provides:	lib%{oname}-devel-static = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description -n %{develnamestatic}
+Development static files and headers for %{name}.
+
+
+
 %prep
 %setup -q
 
@@ -67,7 +84,6 @@ Development files and headers for %{name}.
 %make
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
 
 %makeinstall_std
 %ifarch x86_64
@@ -88,19 +104,7 @@ chrpath -d %{buildroot}%{_bindir}/xapian-metadata
 chrpath -d %{buildroot}%{_bindir}/xapian-replicate
 %endif
 
-%clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
 %files
-%defattr(-,root,root)
 %{_bindir}/copydatabase
 %{_bindir}/delve
 %{_bindir}/quest
@@ -111,18 +115,16 @@ chrpath -d %{buildroot}%{_bindir}/xapian-replicate
 %{_mandir}/man1/*
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/libxapian.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root)
-%{_bindir}/xapian-config
 %doc %{_docdir}/%{name}/
 %dir %{_includedir}/xapian
 %{_includedir}/xapian/*.h
 %{_includedir}/*.h
 %{_datadir}/aclocal/xapian.m4
-%{_libdir}/libxapian.a
-%{_libdir}/libxapian.la
 %{_libdir}/libxapian.so
 %{_libdir}/cmake/xapian/*.cmake
+
+%files -n %{develnamestatic}
+%{_libdir}/libxapian.a

@@ -5,9 +5,9 @@
 %define develnamestatic %mklibname %{oname} -d -s
 
 Summary:	Search engine library
-Name:           xapian-core
+Name:		xapian-core
 Version:	1.2.10
-Release:        1
+Release:	2
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.xapian.org/
@@ -52,8 +52,6 @@ Requires:	%{libname} = %{version}-%{release}
 %description -n %{develname}
 Development files and headers for %{name}.
 
-
-
 %package  -n %{develnamestatic}
 Summary:	Development files for %{name}
 Group:		Development/Other
@@ -61,13 +59,10 @@ Provides:	%{name}-devel-static = %{version}-%{release}
 Provides:	lib%{name}-devel-static = %{version}-%{release}
 Provides:	%{oname}-devel-static = %{version}-%{release}
 Provides:	lib%{oname}-devel-static = %{version}-%{release}
-Requires:	%{libname} = %{version}-%{release}
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description -n %{develnamestatic}
 Development static files and headers for %{name}.
-
-
 
 %prep
 %setup -q
@@ -84,7 +79,6 @@ Development static files and headers for %{name}.
 %make
 
 %install
-
 %makeinstall_std
 %ifarch x86_64
 chrpath -d %{buildroot}%{_bindir}/copydatabase
@@ -112,6 +106,7 @@ chrpath -d %{buildroot}%{_bindir}/xapian-replicate
 %{_bindir}/simpleindex
 %{_bindir}/simplesearch
 %{_bindir}/xapian-*
+%exclude %{_bindir}/xapian-config
 %{_mandir}/man1/*
 
 %files -n %{libname}
@@ -120,6 +115,7 @@ chrpath -d %{buildroot}%{_bindir}/xapian-replicate
 %files -n %{develname}
 %doc %{_docdir}/%{name}/
 %dir %{_includedir}/xapian
+%{_bindir}/xapian-config
 %{_includedir}/xapian/*.h
 %{_includedir}/*.h
 %{_datadir}/aclocal/xapian.m4

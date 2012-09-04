@@ -6,8 +6,8 @@
 
 Summary:	Search engine library
 Name:		xapian-core
-Version:	1.2.10
-Release:	2
+Version:	1.2.12
+Release:	1
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.xapian.org/
@@ -124,3 +124,4 @@ chrpath -d %{buildroot}%{_bindir}/xapian-replicate
 
 %files -n %{develnamestatic}
 %{_libdir}/libxapian.a
+%{_libdir}/libxapian.la

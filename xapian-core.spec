@@ -124,4 +124,6 @@ chrpath -d %{buildroot}%{_bindir}/xapian-replicate
 
 %files -n %{develnamestatic}
 %{_libdir}/libxapian.a
+%if %mdkversion < 201200
 %{_libdir}/libxapian.la
+%endif

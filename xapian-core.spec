@@ -12,15 +12,15 @@ License:	GPLv2+
 Group:		Databases
 URL:		http://www.xapian.org/
 Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.gz
-BuildRequires:	zlib-devel
+BuildRequires:	pkgconfig(uuid)
+BuildRequires:	pkgconfig(zlib)
 BuildRequires:	valgrind
 %ifarch x86_64
 BuildRequires:	chrpath
 %endif
-BuildRequires:	libuuid-devel
 Requires:	%{libname} = %{version}-%{release}
 Obsoletes:	xapian < 1.0.7
-Provides:	xapian
+Provides:	xapian = %{version}-%{release}
 
 %description
 Xapian is an Open Source Search Engine Library, released under the 
@@ -124,6 +124,5 @@ chrpath -d %{buildroot}%{_bindir}/xapian-replicate
 
 %files -n %{develnamestatic}
 %{_libdir}/libxapian.a
-%if %mdkversion < 201200
-%{_libdir}/libxapian.la
-%endif
+
+

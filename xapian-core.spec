@@ -7,7 +7,7 @@
 Summary:	Search engine library
 Name:		xapian-core
 Version:	1.2.13
-Release:	8
+Release:	9
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.xapian.org/

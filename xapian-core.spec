@@ -6,12 +6,12 @@
 
 Summary:	Search engine library
 Name:		xapian-core
-Version:	1.2.13
-Release:	9
+Version:	1.2.17
+Release:	1
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.xapian.org/
-Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.gz
+Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.xz
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	valgrind

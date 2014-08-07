@@ -2,7 +2,6 @@
 %define major 22
 %define libname %mklibname %{oname} %{major}
 %define develname %mklibname %{oname} -d
-%define develnamestatic %mklibname %{oname} -d -s
 
 Summary:	Search engine library
 Name:		xapian-core
@@ -48,27 +47,17 @@ Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	%{oname}-devel = %{version}-%{release}
 Provides:	lib%{oname}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
+Obsoletes:	%{mklibname %{oname} -d -s} < 1.2.17-3
 
 %description -n %{develname}
 Development files and headers for %{name}.
 
-%package  -n %{develnamestatic}
-Summary:	Development files for %{name}
-Group:		Development/Other
-Provides:	%{name}-devel-static = %{version}-%{release}
-Provides:	lib%{name}-devel-static = %{version}-%{release}
-Provides:	%{oname}-devel-static = %{version}-%{release}
-Provides:	lib%{oname}-devel-static = %{version}-%{release}
-Requires:	%{name}-devel = %{version}-%{release}
-
-%description -n %{develnamestatic}
-Development static files and headers for %{name}.
 
 %prep
 %setup -q
 
 %build
-%configure2_5x \
+%configure \
 %ifarch x86_64
 	--enable-sse \
 %else
@@ -121,6 +110,3 @@ chrpath -d %{buildroot}%{_bindir}/xapian-replicate
 %{_datadir}/aclocal/xapian.m4
 %{_libdir}/libxapian.so
 %{_libdir}/cmake/xapian/*.cmake
-
-%files -n %{develnamestatic}
-%{_libdir}/libxapian.a

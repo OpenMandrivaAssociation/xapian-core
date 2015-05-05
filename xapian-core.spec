@@ -110,3 +110,4 @@ chrpath -d %{buildroot}%{_bindir}/xapian-replicate
 %{_datadir}/aclocal/xapian.m4
 %{_libdir}/libxapian.so
 %{_libdir}/cmake/xapian/*.cmake
+%{_libdir}/pkgconfig/xapian-core.pc

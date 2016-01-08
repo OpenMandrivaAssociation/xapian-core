@@ -5,8 +5,8 @@
 
 Summary:	Search engine library
 Name:		xapian-core
-Version:	1.2.20
-Release:	3
+Version:	1.2.22
+Release:	1
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.xapian.org/
@@ -52,14 +52,13 @@ Obsoletes:	%{mklibname %{oname} -d -s} < 1.2.17-3
 %description -n %{develname}
 Development files and headers for %{name}.
 
-
 %prep
 %setup -q
 
 %build
 %configure \
 %ifarch x86_64
-	--enable-sse \
+	--enable-sse=sse2 \
 %else
 	--disable-sse \
 %endif

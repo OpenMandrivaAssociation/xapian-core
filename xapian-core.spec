@@ -13,7 +13,6 @@ URL:		http://www.xapian.org/
 Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.xz
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	pkgconfig(zlib)
-BuildRequires:	valgrind
 %ifarch x86_64
 BuildRequires:	chrpath
 %endif

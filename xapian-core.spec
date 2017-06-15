@@ -1,11 +1,11 @@
 %define oname xapian
-%define major 22
+%define major 30
 %define libname %mklibname %{oname} %{major}
 %define develname %mklibname %{oname} -d
 
 Summary:	Search engine library
 Name:		xapian-core
-Version:	1.2.22
+Version:	1.4.4
 Release:	1
 License:	GPLv2+
 Group:		Databases
@@ -13,9 +13,7 @@ URL:		http://www.xapian.org/
 Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.xz
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	pkgconfig(zlib)
-%ifarch x86_64
 BuildRequires:	chrpath
-%endif
 Requires:	%{libname} = %{version}-%{release}
 Obsoletes:	xapian < 1.0.7
 Provides:	xapian = %{version}-%{release}
@@ -67,27 +65,13 @@ Development files and headers for %{name}.
 
 %install
 %makeinstall_std
-%ifarch x86_64
-chrpath -d %{buildroot}%{_bindir}/copydatabase
-chrpath -d %{buildroot}%{_bindir}/delve
-chrpath -d %{buildroot}%{_bindir}/quest
-chrpath -d %{buildroot}%{_bindir}/simpleexpand
-chrpath -d %{buildroot}%{_bindir}/simpleindex
-chrpath -d %{buildroot}%{_bindir}/simplesearch
-chrpath -d %{buildroot}%{_bindir}/xapian-compact
-chrpath -d %{buildroot}%{_bindir}/xapian-progsrv
-chrpath -d %{buildroot}%{_bindir}/xapian-tcpsrv
-chrpath -d %{buildroot}%{_bindir}/xapian-check
-chrpath -d %{buildroot}%{_bindir}/xapian-inspect
-chrpath -d %{buildroot}%{_bindir}/xapian-replicate-server
-chrpath -d %{buildroot}%{_bindir}/xapian-chert-update
-chrpath -d %{buildroot}%{_bindir}/xapian-metadata
-chrpath -d %{buildroot}%{_bindir}/xapian-replicate
-%endif
+for i in %{buildroot}%{_bindir}/*; do
+	# Allow failure for shell scripts
+	chrpath -d $i || :
+done
 
 %files
 %{_bindir}/copydatabase
-%{_bindir}/delve
 %{_bindir}/quest
 %{_bindir}/simpleexpand
 %{_bindir}/simpleindex
@@ -95,6 +79,7 @@ chrpath -d %{buildroot}%{_bindir}/xapian-replicate
 %{_bindir}/xapian-*
 %exclude %{_bindir}/xapian-config
 %{_mandir}/man1/*
+%{_datadir}/xapian-core
 
 %files -n %{libname}
 %{_libdir}/libxapian.so.%{major}*

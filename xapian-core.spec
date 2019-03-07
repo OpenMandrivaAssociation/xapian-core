@@ -5,8 +5,8 @@
 
 Summary:	Search engine library
 Name:		xapian-core
-Version:	1.4.5
-Release:	3
+Version:	1.4.11
+Release:	1
 License:	GPLv2+
 Group:		Databases
 URL:		http://www.xapian.org/
@@ -50,21 +50,22 @@ Obsoletes:	%{mklibname %{oname} -d -s} < 1.2.17-3
 Development files and headers for %{name}.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 %configure \
-%ifarch x86_64
+%ifarch %{x86_64}
 	--enable-sse=sse2 \
 %else
 	--disable-sse \
 %endif
 	--enable-shared
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
+
 for i in %{buildroot}%{_bindir}/*; do
 	# Allow failure for shell scripts
 	chrpath -d $i || :

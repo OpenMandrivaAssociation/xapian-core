@@ -5,7 +5,7 @@
 
 Summary:	Search engine library
 Name:		xapian-core
-Version:	1.4.23
+Version:	1.4.24
 Release:	1
 License:	GPLv2+
 Group:		Databases

@@ -9,7 +9,7 @@ Version:	1.4.26
 Release:	1
 License:	GPLv2+
 Group:		Databases
-URL:		http://www.xapian.org/
+URL:		https://www.xapian.org/
 Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.xz
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	pkgconfig(zlib)

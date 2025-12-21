@@ -11,6 +11,11 @@ License:	GPLv2+
 Group:		Databases
 URL:		https://www.xapian.org/
 Source0:	http://www.oligarchy.co.uk/xapian/%{version}/%{name}-%{version}.tar.xz
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(uuid)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	chrpath
